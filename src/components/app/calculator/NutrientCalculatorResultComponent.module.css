@@ -1,0 +1,10 @@
+/* GaugeComponent.module.css */
+.gaugeText {
+    fill: #ff0000;
+    /* Text color */
+}
+
+.gaugeBar {
+    stroke: #ad19b082;
+    /* Gauge bar color */
+}
