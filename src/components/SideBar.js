@@ -20,10 +20,10 @@ const SideBar = ({ isOpen }) => {
 
     return (
         <div
-            className={`top-0 left-0 w-2/12 bg-slate-100 overflow-y-auto h-full transition-all duration-300 ease-in-out transform ${
+            className={`top-0 left-0 w-2/12 bg-slate-100 h-full transition-all duration-[900ms] ease-in-out ${
                 isOpen
-                    ? 'sticky translate-x-2 opacity-100 pointer-events-auto'
-                    : 'absolute -translate-x-full opacity-0 pointer-events-none'
+                    ? 'sticky translate-x-1.5 opacity-100 max-w-[900px] pointer-events-auto'
+                    : 'max-w-0 relative -translate-x-2 opacity-0 pointer-events-none'
             }`}
         >
             <div className='flex align-center ms-10 p-1 mt-6 border-b border-slate-200'>
@@ -41,10 +41,16 @@ const SideBar = ({ isOpen }) => {
                 />
             </div>
 
-            <div className='flex flex-col justify-start text-slate-500 ms-8 mt-4 text-sm gap-y-1'>
+            <div
+                className={`flex flex-col justify-start text-slate-500 ms-8 mt-4 text-sm gap-y-1 transition-all duration-700 delay-600 ease-in-out ${
+                    isOpen
+                        ? 'translate-x-0 opacity-100'
+                        : '-translate-x-1 opacity-0'
+                }`}
+            >
                 <Link
                     href='/recipe'
-                    className='py-3 rounded-l-md flex items-center justify-between hover:text-indigo-900 hover:shadow-md transition duration-700'
+                    className='py-3 rounded-l-md flex items-center justify-between hover:text-indigo-900 transition duration-700'
                 >
                     <span className='ms-5 flex items-center gap-2'>
                         <FiLayers />
@@ -68,7 +74,7 @@ const SideBar = ({ isOpen }) => {
                                 prev === 'nutrispoon' ? null : 'nutrispoon'
                             )
                         }
-                        className={`flex py-3 rounded-l-md items-center justify-between hover:text-indigo-900 transition duration-700 ${
+                        className={`overflow-y-hidden flex py-3 rounded-l-md items-center justify-between hover:text-indigo-900 transition duration-700 ${
                             isMenuClick === 'nutrispoon'
                                 ? 'bg-slate-200 text-indigo-900 font-semibold'
                                 : ''
@@ -175,7 +181,7 @@ const SideBar = ({ isOpen }) => {
                         className={`py-3 rounded-l-md flex items-center justify-between hover:text-indigo-900 transition duration-700 ${
                             isMenuClick === 'maintenance'
                                 ? 'bg-slate-200 text-indigo-900 max-height-[500px]'
-                            : ''
+                                : ''
                         }`}
                     >
                         <span className='ms-5 flex items-center gap-2'>
