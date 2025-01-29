@@ -1,10 +1,19 @@
-import { FiAlignJustify, FiAlignRight } from 'react-icons/fi';
+import {
+    FiAlignJustify,
+    FiAlignRight,
+    FiBell,
+    FiLogOut,
+    FiSettings,
+    FiUser,
+    FiUsers,
+} from 'react-icons/fi';
 import Image from 'next/image';
 import spoonICO from '/public/images/spoon-logo-blue.png';
-import { React, useState } from 'react';
+import { React, useEffect, useRef, useState } from 'react';
+import { FaBell } from 'react-icons/fa';
 
 const NavBar = ({ toggleSidebar, isOpen }) => {
-    const [isHovered, setIsHovered] = useState(false);
+    const [profileshow, setProfileShow] = useState(false);
 
     return (
         <div className='flex bg-slate-100 w-min-screen h-20 border border-b items-center px-5 sticky top-0 z-50'>
@@ -26,19 +35,72 @@ const NavBar = ({ toggleSidebar, isOpen }) => {
                 </div>
                 <h1 className='text-2xl font-bold'>Recipes</h1>
             </div>
-            <div className='flex justify-end w-full'>
-                <Image
-                    src={spoonICO}
-                    width={50}
-                    className='w-50 h-50'
-                    alt='spoon ico'
-                />
-                <div className='flex flex-col'>
-                    <div className='items-center px-2'>
-                        <h2 className='text-md font-bold'>Daniel Narciso</h2>
+            <div className='relative flex justify-end w-full'>
+                <div className='flex items-center gap-5'>
+                    <div className='relative flex hover:scale-110 hover:rotate-[14deg] transition duration-300 ease-in-out cursor-pointer'>
+                        <FaBell className='text-yellow-500 text-3xl' />
+                        <div className='absolute top-0 right-0'>
+                            <span className='relative flex ms-5'>
+                                <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75'></span>
+                                <span className='relative inline-flex h-3 w-3 rounded-full bg-red-500'></span>
+                            </span>
+                        </div>
                     </div>
-                    <div className='items-center px-2'>
-                        <h2 className='text-xs'>Land Based Employee</h2>
+
+                    <div
+                        className='relative flex items-center gap-2 cursor-pointer transition duration-500 ease-in-out hover:ring-2 hover:ring-spoonblue hover:border-spoonblue hover:bg-slate-200 rounded-md p-2'
+                        onClick={() => setProfileShow(prevState => !prevState)}
+                    >
+                        <Image
+                            src={spoonICO}
+                            width={50}
+                            height={50}
+                            className='rounded-full'
+                            alt='User Avatar'
+                        />
+                        <div className='flex flex-col'>
+                            <div className='px-2'>
+                                <h2 className='text-md font-bold'>
+                                    Daniel Narciso
+                                </h2>
+                            </div>
+                            <div className='px-2'>
+                                <h2 className='text-xs'>Land Based Employee</h2>
+                            </div>
+                        </div>
+
+                        <div
+                            className={`relative transition-all duration-300 ease-in-out ${
+                                profileshow
+                                    ? 'opacity-100 translate-y-0'
+                                    : 'opacity-0 -translate-y-4'
+                            }`}
+                        >
+                            <div
+                                className={`absolute top-10 right-0 bg-slate-100 w-48 rounded-md shadow-lg ${
+                                    profileshow ? 'block' : 'hidden'
+                                }`}
+                            >
+                                <div className='h-10 border-b flex items-center ps-3 hover:bg-slate-200 transition duration-300 ease-in-out'>
+                                    <FiUser className='text-spoonblue' />
+                                    <h1 className='text-sm font-semibold p-2'>
+                                        Profile
+                                    </h1>
+                                </div>
+                                <div className='h-10 border-b flex items-center ps-3 hover:bg-slate-200 transition duration-300 ease-in-out'>
+                                    <FiSettings className='text-yellow-500' />
+                                    <h1 className='text-sm font-semibold p-2'>
+                                        Settings
+                                    </h1>
+                                </div>
+                                <div className='h-10 flex items-center ps-3 hover:bg-slate-200 transition duration-300 ease-in-out'>
+                                    <FiLogOut className='text-red-400' />
+                                    <h1 className='text-sm font-semibold p-2'>
+                                        Log out
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

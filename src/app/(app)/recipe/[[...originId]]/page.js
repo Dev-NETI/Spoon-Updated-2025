@@ -160,7 +160,7 @@ function Page({ params = null }) {
 
                                 {/* Accordion Content */}
                                 <div
-                                    className={`grid ps-5 bg-slate-200 rounded-b-xl overflow-hidden transition-all duration-700 ease-in-out ${
+                                    className={`grid ps-5 bg-slate-200 rounded-b-xl overflow-hidden transition-all duration-500 ease-in-out ${
                                         isOpen
                                             ? 'max-h-[1000px] opacity-100'
                                             : 'opacity-0 max-h-0'

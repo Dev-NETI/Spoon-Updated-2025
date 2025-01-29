@@ -20,11 +20,20 @@ const AppLayout = ({ children }) => {
 
     return (
         <div className='relative flex min-h-screen bg-gray-100'>
-            <SideBar isOpen={isSidebarOpen} />
+            <SideBar
+                isOpen={isSidebarOpen}
+                className={`transition-all duration-700 ease-in-out ${
+                    isSidebarOpen
+                        ? 'translate-x-full'
+                        : '-translate-x-full opacity-0'
+                }`}
+            />
 
             <div
-                className={`flex-1 bg-slate-200 transition-all duration-300 ease-in-out transform ${
-                    isSidebarOpen ? 'translate-x-2' : 'translate-x-0'
+                className={`flex-1 bg-slate-200 transition-all duration-700 ease-in-out ${
+                    isSidebarOpen
+                        ? 'translate-x-2'
+                        : 'translate-x-0 max-w-[10000px]'
                 }`}
             >
                 <NavBar toggleSidebar={toggleSidebar} isOpen={isSidebarOpen} />
