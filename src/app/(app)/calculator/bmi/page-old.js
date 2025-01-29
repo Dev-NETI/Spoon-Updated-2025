@@ -8,11 +8,11 @@ function Bmi() {
 
     return (
         <div
-            className='basis-full  gap-2 p-10 md:p-5 lg:p-5
+            className='basis-full  gap-2 p-10 md:p-5 lg:p-5  
         flex flex-col md:flex-row lg:flex-row '
         >
-            <AnthropometryCard bmi={bmi} setBmi={setBmi} />
             <BmiResultComponent bmi={bmi} />
+            <AnthropometryCard bmi={bmi} setBmi={setBmi} />
         </div>
     );
 }

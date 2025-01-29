@@ -91,7 +91,7 @@ function AnthropometryCard({ bmi, setBmi }) {
     return (
         <div
             className='basis-full md:basis-6/12 lg:basis-6/12 
-            border-0 rounded-lg bg-gray-50 shadow-lg 
+            border-0 rounded-lg bg-white shadow-lg 
             flex flex-col'
         >
             <div className='basis-full p-4'>
