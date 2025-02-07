@@ -24,7 +24,7 @@ function AnthropometryInputComponent({
     return (
         <div className='basis-6/12 flex flex-col gap-4 p-2'>
             <p className='basis-full font-semibold text-gray-700'>{title}</p>
-            <div className='basis-full bg-gray-200 p-4'>
+            <div className='basis-full bg-gray-200 p-4 rounded-xl'>
                 <p className=' text-sm text-gray-700'>{heightLabel}</p>
                 {!editMode && (
                     <p className=' text-xl text-slate-800'>{height}</p>
@@ -57,7 +57,7 @@ function AnthropometryInputComponent({
                     </div>
                 )}
             </div>
-            <div className='basis-full bg-gray-200 p-4'>
+            <div className='basis-full bg-gray-200 p-4 rounded-xl'>
                 <p className=' text-sm text-gray-700'>{weightLabel}</p>
                 {!editMode && (
                     <p className=' text-xl text-slate-800'>{weight}</p>
