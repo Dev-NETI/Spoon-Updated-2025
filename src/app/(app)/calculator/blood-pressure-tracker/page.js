@@ -15,10 +15,10 @@ function BloodPressureTracker() {
                 className='gap-2 p-10 md:p-5 lg:p-5  
                        flex flex-col md:flex-row lg:flex-row  '
             >
+                <BloodPressureTrackerForm />
                 <BloodPressureResultView
                     bloodPressureCategory={bloodPressureCategory}
                 />
-                <BloodPressureTrackerForm />
             </div>
         </BloodPressureContext.Provider>
     );

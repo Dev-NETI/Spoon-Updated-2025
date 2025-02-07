@@ -3,10 +3,10 @@ import { disclaimerDescription } from '@/data/calculator-data';
 
 function Disclaimer() {
     return (
-        <div className='basis-full flex flex-col mt-4 '>
-            <div className='basis-full bg-red-600 flex gap-2 p-2'>
+        <div className='flex flex-col mt-4 shadow-stone-300 shadow-2xl'>
+            <div className='bg-red-700 flex gap-2 p-4 rounded-t-xl'>
                 <svg
-                    className='w-6 h-6 text-stone-200 dark:text-white'
+                    className='w-6 h-6 text-stone-100 dark:text-white'
                     aria-hidden='true'
                     xmlns='http://www.w3.org/2000/svg'
                     width='24'
@@ -22,11 +22,11 @@ function Disclaimer() {
                         d='M12 13V8m0 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z'
                     />
                 </svg>
-                <p className='font-bold text-stone-200 text-xl'>DISCLAIMER</p>
+                <p className='font-bold text-stone-100 text-xl'>DISCLAIMER</p>
             </div>
 
-            <div className='basis-full bg-stone-50 px-4 py-2 text-justify'>
-                <p className='font-semibold text-stone-700 text-xs'>
+            <div className='bg-white p-6 text-justify rounded-b-xl'>
+                <p className='font-semibold text-stone-700 text-sm'>
                     {disclaimerDescription}
                 </p>
             </div>

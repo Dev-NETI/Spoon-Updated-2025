@@ -1,76 +1,95 @@
+'use client';
 import React, { useEffect, useState } from 'react';
-import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-    DialogDescription,
-} from '@/components/ui/dialog';
-import BmiHistoryList from './BmiHistoryList';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
 import { useAuth } from '@/hooks/auth';
 import { useBmiLog } from '@/hooks/api/bmi-log';
+import {
+    LineChart,
+    Line,
+    CartesianGrid,
+    XAxis,
+    YAxis,
+    Tooltip,
+} from 'recharts';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction='up' ref={ref} {...props} />;
+});
 
 function BmiHistoryModal() {
     const { user } = useAuth();
     const { show } = useBmiLog();
     const [bmiLogData, setBmiLogData] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 3;
+    const [open, setOpen] = React.useState(false);
 
     useEffect(() => {
         const fetchBmiData = async () => {
             const { data } = await show(user.id);
-            setBmiLogData(data);
+            const modifiedData = data.map(item => ({
+                ...item,
+                uv: item.bmi,
+                created_date: formatDate(item.created_at),
+            }));
+            setBmiLogData(modifiedData);
         };
-        fetchBmiData();
-    }, [user.id, show]);
+        if (!bmiLogData.length > 0) {
+            fetchBmiData();
+        }
+    }, [user.id, show, bmiLogData]);
 
-    const handlePageChange = newPage => {
-        setCurrentPage(newPage);
-    };
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toISOString().split('T')[0];
+    }
 
     return (
-        <Dialog>
-            <DialogTrigger
-                className='inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold 
-                        text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 
-                        focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150'
+        <>
+            <Button
+                variant='contained'
+                onClick={() => setOpen(true)}
+                sx={{ backgroundColor: '#1F2937' }}
             >
-                BMI History
-            </DialogTrigger>
-            <DialogContent>
-                <DialogHeader>
-                    <DialogTitle>BMI History</DialogTitle>
-                </DialogHeader>
-                <div>
-                    <BmiHistoryList
-                        bmiLogData={bmiLogData}
-                        currentPage={currentPage}
-                        itemsPerPage={itemsPerPage}
-                    />
-                    <div className='flex justify-center mt-4'>
-                        <button
-                            onClick={() => handlePageChange(currentPage - 1)}
-                            disabled={currentPage === 1}
-                            className='px-4 py-2 mr-2 bg-gray-800 text-white rounded disabled:opacity-50'
-                        >
-                            Previous
-                        </button>
-                        <button
-                            onClick={() => handlePageChange(currentPage + 1)}
-                            disabled={
-                                currentPage * itemsPerPage >= bmiLogData.length
-                            }
-                            className='px-4 py-2 bg-gray-800 text-white rounded disabled:opacity-50'
-                        >
-                            Next
-                        </button>
-                    </div>
-                </div>
-                <DialogDescription />
-            </DialogContent>
-        </Dialog>
+                Bmi History
+            </Button>
+            <Dialog
+                maxWidth='xl'
+                open={open}
+                TransitionComponent={Transition}
+                keepMounted
+                onClose={() => setOpen(false)}
+            >
+                <DialogTitle>BMI History</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        <LineChart width={1200} height={500} data={bmiLogData}>
+                            <Line
+                                type='monotone'
+                                dataKey='uv'
+                                stroke='#8884d8'
+                            />
+                            <CartesianGrid stroke='#ccc' />
+                            <XAxis dataKey='created_date' />
+                            <YAxis dataKey='bmi' />
+                            <Tooltip />
+                        </LineChart>
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button
+                        onClick={() => setOpen(false)}
+                        sx={{ backgroundColor: '#1F2937', color: 'white' }}
+                    >
+                        Close
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </>
     );
 }
 
