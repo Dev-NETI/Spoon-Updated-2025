@@ -54,7 +54,7 @@ function TopBar({ isMobileView, isDrawerOpen, handleDrawerOpen }) {
                 )}
 
                 <Image
-                    className='mt-12 md:mt-0 lg:mt-0'
+                    className='mt-12 md:mt-0 lg:mt-0 w-auto h-auto'
                     src={logo}
                     alt='Spoon Logo'
                     width={150}

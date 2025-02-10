@@ -20,23 +20,27 @@ const SideBar = ({ isOpen }) => {
 
     return (
         <div
-            className={`top-0 left-0 w-2/12 bg-slate-100 h-full transition-all duration-[900ms] ease-in-out ${
-                isOpen
-                    ? 'sticky translate-x-1.5 opacity-100 max-w-[900px] pointer-events-auto'
-                    : 'max-w-0 relative -translate-x-2 opacity-0 pointer-events-none'
-            }`}
+            className={`top-0 left-0 w-2/12 bg-slate-100 h-full transition-all duration-[900ms] ease-in-out xl:block
+                lg:hidden
+                md:hidden sm:hidden ${
+                    isOpen
+                        ? 'sticky translate-x-1.5 opacity-100 max-w-[900px] pointer-events-auto'
+                        : 'max-w-0 relative -translate-x-2 opacity-0 pointer-events-none'
+                }`}
         >
             <div className='flex align-center ms-10 p-1 mt-6 border-b border-slate-200'>
                 <Image
                     src={spoonICO}
                     className={`h-12 w-12 transition duration-1000 ease-in-out transform ${isOpen ? 'rotate-90' : 'rotate-0'}`}
                     width='50'
+                    height='auto'
                     alt='spoon ico'
                 />
                 <Image
                     src={logo}
                     className='h-12 w-auto'
                     width='100'
+                    height='auto'
                     alt='spoon logo'
                 />
             </div>
@@ -50,7 +54,7 @@ const SideBar = ({ isOpen }) => {
             >
                 <Link
                     href='/recipe'
-                    className='py-3 rounded-l-md flex items-center justify-between hover:text-indigo-900 transition duration-700'
+                    className='py-3 rounded-l-md flex items-center justify-between hover:text-indigo-900 transition duration-700 ease-in-out hover:translate-x-1'
                 >
                     <span className='ms-5 flex items-center gap-2'>
                         <FiLayers />
@@ -74,7 +78,7 @@ const SideBar = ({ isOpen }) => {
                                 prev === 'nutrispoon' ? null : 'nutrispoon'
                             )
                         }
-                        className={`overflow-y-hidden flex py-3 rounded-l-md items-center justify-between hover:text-indigo-900 transition duration-700 ${
+                        className={`overflow-y-hidden flex py-3 rounded-l-md items-center justify-between hover:text-indigo-900 transition duration-700 hover:translate-x-1 ${
                             isMenuClick === 'nutrispoon'
                                 ? 'bg-slate-200 text-indigo-900 font-semibold'
                                 : ''
@@ -153,7 +157,7 @@ const SideBar = ({ isOpen }) => {
                 {/* Sibling Content */}
                 <Link
                     href='/'
-                    className='bg-slate-100 py-3 rounded-l-md hover:text-indigo-900 transition duration-700 ease-in-out'
+                    className='bg-slate-100 py-3 rounded-l-md hover:text-indigo-900 transition duration-700 ease-in-out hover:translate-x-1'
                 >
                     <span className='ms-5 flex items-center gap-2'>
                         <FiEdit />
@@ -163,7 +167,7 @@ const SideBar = ({ isOpen }) => {
 
                 <Link
                     href='/'
-                    className='bg-slate-100 py-3 rounded-l-md hover:text-indigo-900 transition duration-700'
+                    className='bg-slate-100 py-3 rounded-l-md hover:text-indigo-900 transition duration-700 hover:translate-x-1'
                 >
                     <span className='ms-5 flex items-center gap-2'>
                         <FiFileText />
@@ -178,7 +182,7 @@ const SideBar = ({ isOpen }) => {
                                 prev === 'maintenance' ? null : 'maintenance'
                             )
                         }
-                        className={`py-3 rounded-l-md flex items-center justify-between hover:text-indigo-900 transition duration-700 ${
+                        className={`py-3 rounded-l-md flex items-center justify-between hover:text-indigo-900 transition duration-700 hover:translate-x-1 ${
                             isMenuClick === 'maintenance'
                                 ? 'bg-slate-200 text-indigo-900 max-height-[500px]'
                                 : ''

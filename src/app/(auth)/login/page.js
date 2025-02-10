@@ -65,7 +65,7 @@ const Login = () => {
                         id='email'
                         type='email'
                         value={email}
-                        className='block mt-1 w-full'
+                        className='block mt-1 w-full bg-slate-100 ring-1 ring-blue-700 ring-opacity-35'
                         onChange={event => setEmail(event.target.value)}
                         required
                         autoFocus
@@ -82,7 +82,7 @@ const Login = () => {
                         id='password'
                         type='password'
                         value={password}
-                        className='block mt-1 w-full'
+                        className='block mt-1 w-full bg-slate-100 ring-1 ring-blue-700 ring-opacity-35'
                         onChange={event => setPassword(event.target.value)}
                         required
                         autoComplete='current-password'
@@ -104,7 +104,9 @@ const Login = () => {
                 </div>
 
                 <div className='flex items-center justify-center mt-4'>
-                    <Button className='w-full justify-center'>Login</Button>
+                    <Button className='w-full justify-center active:scale-105 duration-50 ease-in-out'>
+                        Login
+                    </Button>
                 </div>
 
                 <div className='flex items-right justify-right mt-4'>

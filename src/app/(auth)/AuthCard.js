@@ -7,7 +7,7 @@ const AuthCard = ({ logo, children, title }) => (
             {/* <Image src={icon} alt='bg_star' priority /> */}
         </div>
         {logo}
-        <div className='w-full max-w-md mt-4 bg-white shadow-lg border animate-fade-up animate-once animate-duration-1000 rounded-lg'>
+        <div className='w-full max-w-md mt-4 bg-slate-300 shadow-lg border animate-fade-up animate-once animate-duration-1000 rounded-lg'>
             <AuthCardHeader title={title} />
             <div className='p-10 flex flex-col'>{children}</div>
         </div>

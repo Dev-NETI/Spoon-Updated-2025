@@ -57,18 +57,18 @@ function VerificationCodeForm({
                             <FormControl className='flex'>
                                 <InputOTP maxLength={6} {...field}>
                                     <InputOTPGroup className='flex mx-auto'>
-                                        <InputOTPSlot type='number' index={0} />
-                                        <InputOTPSlot type='number' index={1} />
+                                        <InputOTPSlot className="bg-slate-100" type='number' index={0} />
+                                        <InputOTPSlot className="bg-slate-100" type='number' index={1} />
                                     </InputOTPGroup>
                                     <InputOTPSeparator />
                                     <InputOTPGroup>
-                                        <InputOTPSlot type='number' index={2} />
-                                        <InputOTPSlot type='number' index={3} />
+                                        <InputOTPSlot className="bg-slate-100" type='number' index={2} />
+                                        <InputOTPSlot className="bg-slate-100" type='number' index={3} />
                                     </InputOTPGroup>
                                     <InputOTPSeparator />
                                     <InputOTPGroup>
-                                        <InputOTPSlot type='number' index={4} />
-                                        <InputOTPSlot type='number' index={5} />
+                                        <InputOTPSlot className="bg-slate-100" type='number' index={4} />
+                                        <InputOTPSlot className="bg-slate-100" type='number' index={5} />
                                     </InputOTPGroup>
                                 </InputOTP>
                             </FormControl>
@@ -95,7 +95,7 @@ function VerificationCodeForm({
                         </p>
                     ) : (
                         <p
-                            className='text-sm text-blue-700'
+                            className='text-sm text-blue-700 cursor-pointer'
                             onClick={() => handleResendVerificationCode()}
                         >
                             Click here to resend!

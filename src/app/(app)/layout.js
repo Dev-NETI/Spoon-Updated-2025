@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { useAuth } from '@/hooks/auth';
 import Loading from '@/app/(app)/Loading';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import SideBar from '@/components/SideBar';
 import NavBar from '@/components/NavBar';
 
@@ -19,7 +19,9 @@ const AppLayout = ({ children }) => {
     };
 
     return (
-        <div className='relative flex min-h-screen bg-gray-100'>
+        <div
+            className='relative flex min-h-screen bg-gray-100'
+        >
             <SideBar
                 isOpen={isSidebarOpen}
                 className={`transition-all duration-700 ease-in-out ${
