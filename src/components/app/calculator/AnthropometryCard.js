@@ -6,7 +6,7 @@ import { calculateBMI } from '@/lib/utils';
 import * as Yup from 'yup';
 import { useUserHook } from '@/hooks/api/user';
 import { useBmiLog } from '@/hooks/api/bmi-log';
-import { useToast } from '@/components/ui/use-toast';
+import { toast } from 'sonner';
 
 function AnthropometryCard({ bmi, setBmi }) {
     const [editMode, setEditMode] = useState(false);
@@ -19,7 +19,6 @@ function AnthropometryCard({ bmi, setBmi }) {
     });
     const [error, setError] = useState({});
     const { patch } = useUserHook('user/update-measurement');
-    const { toast } = useToast();
     const { store } = useBmiLog();
     const buttonLabel = editMode ? 'Cancel' : 'Edit';
     const buttonStyle = editMode && 'bg-red-700';
@@ -54,30 +53,15 @@ function AnthropometryCard({ bmi, setBmi }) {
             const { data: updateResponse } = await patch(user.slug, object);
 
             if (!updateResponse) {
-                return toast({
-                    title: 'Oops!',
-                    description: 'Something went wrong!',
-                    variant: 'destructive',
-                    position: 'top-right',
-                });
+                return toast.error('Something went wrong!');
             }
 
             const { data: storeResponse } = await store(object);
 
             if (!storeResponse) {
-                return toast({
-                    title: 'Oops!',
-                    description: 'Something went wrong!',
-                    variant: 'destructive',
-                    position: 'top-right',
-                });
+                return toast.error('Something went wrong!');
             }
-
-            toast({
-                title: 'Success',
-                description: 'Measurements saved successfully!',
-                position: 'top-right',
-            });
+            toast.success('Measurements saved successfully!');
             setEditMode(false);
         } catch (error) {
             const errors = error.inner.reduce((acc, curr) => {
@@ -91,10 +75,11 @@ function AnthropometryCard({ bmi, setBmi }) {
     return (
         <div
             className='basis-full md:basis-6/12 lg:basis-6/12 
-            border-0 rounded-lg bg-gray-50 shadow-lg 
+            border-0 rounded-lg bg-white shadow-lg 
             flex flex-col'
         >
             <div className='basis-full p-4'>
+                <p className='font-bold text-xl'>Physical Stats</p>
                 <Button
                     type='button'
                     className={`${buttonStyle} float-end`}
@@ -104,7 +89,7 @@ function AnthropometryCard({ bmi, setBmi }) {
                 </Button>
             </div>
 
-            <div className='basis-full flex flex-row gap-4'>
+            <div className='basis-full flex flex-row gap-4 p-6'>
                 <AnthropometryInputComponent
                     title='Standard'
                     heightLabel='Height(ft)'

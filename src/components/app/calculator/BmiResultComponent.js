@@ -7,7 +7,7 @@ function BmiResultComponent({ bmi }) {
         <>
             <div
                 className='basis-full md:basis-6/12 lg:basis-6/12 
-            border-0 rounded-lg bg-gray-50 shadow-lg
+            border-0 rounded-lg bg-white shadow-lg
             flex flex-col gap-4 '
             >
                 <div className='flex items-end justify-end p-4'>
