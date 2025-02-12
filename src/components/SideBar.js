@@ -20,13 +20,11 @@ const SideBar = ({ isOpen }) => {
 
     return (
         <div
-            className={`top-0 left-0 w-2/12 bg-slate-100 h-full transition-all duration-[900ms] ease-in-out xl:block
-                lg:hidden
-                md:hidden sm:hidden ${
-                    isOpen
-                        ? 'sticky translate-x-1.5 opacity-100 max-w-[900px] pointer-events-auto'
-                        : 'max-w-0 relative -translate-x-2 opacity-0 pointer-events-none'
-                }`}
+            className={`top-0 left-0 w-2/12 bg-slate-100 h-full transition-all duration-[900ms] ease-in-out hidden xl:flex flex-col ${
+                isOpen
+                    ? 'xl:sticky xl:translate-x-1.5 xl:opacity-100 xl:max-w-[900px] xl:pointer-events-auto'
+                    : 'xl:max-w-0 xl:relative xl:opacity-0 xl:pointer-events-none'
+            }`}
         >
             <div className='flex align-center ms-10 p-1 mt-6 border-b border-slate-200'>
                 <Image

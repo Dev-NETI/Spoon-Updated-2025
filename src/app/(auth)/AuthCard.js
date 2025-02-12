@@ -2,7 +2,7 @@
 // import icon from '../../../public/images/star.png';
 import AuthCardHeader from './AuthCardHeader';
 const AuthCard = ({ logo, children, title }) => (
-    <div className='min-h-screen flex flex-col md:flex-col lg:flex-col items-center lg:justify-center bg-blue-800 p-4 relative'>
+    <div className='flex w-full flex-col md:flex-col lg:flex-col items-center lg:justify-center bg-blue-800 p-4'>
         <div className='absolute top-0 right-0 z-49'>
             {/* <Image src={icon} alt='bg_star' priority /> */}
         </div>

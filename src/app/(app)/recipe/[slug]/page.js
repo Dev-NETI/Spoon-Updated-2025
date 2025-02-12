@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     BsBookmarkHeart,
     BsBookmarkHeartFill,
@@ -16,28 +16,51 @@ import Ingredients from '@/components/app/recipe/recipe-details/Ingredients';
 import Procedures from '@/components/app/recipe/recipe-details/Procedures';
 import NutritionTable from '@/components/app/recipe/recipe-details/NutritionTable';
 import Image from 'next/image';
+import { useRecipe } from '@/hooks/api/recipe';
 
-const ShowRecipe = () => {
-    const [loading, setLoading] = useState(true);
-
+const ShowRecipe = ({ params }) => {
+    const { index: getRecipe } = useRecipe(params.slug);
+    const [recipeData, setRecipeData] = useState([]);
     const [clickBookmark, setClickBookmark] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const linkStorage = process.env.NEXT_PUBLIC_STORAGE;
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const { data: fetchedData } = await getRecipe();
+                setRecipeData(fetchedData);
+            } catch (error) {
+                console.error('Error fetching recipe data:', error);
+            } finally {
+                setLoading(true);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     return loading ? (
         <div className='flex flex-col'>
             <div className='flex w-full bg-slate-50 p-5 pb-0 gap-5 shadow-md rounded-t-md'>
-                <div className='w-3/12 flex items-center justify-center'>
+                <div className='w-3/12 flex items-center justify-center bg-slate-100 p-2 rounded-md'>
                     <Image
-                        src='/assets/app/recipes/pork bistek.JPG'
-                        width={240}
-                        height={240}
+                        src={
+                            process.env.NEXT_PUBLIC_STORAGE +
+                            '/' +
+                            recipeData.image_path
+                        }
+                        width={230}
+                        height={230}
                         alt='recipe_img'
-                        className='rounded-md object-contain w-auto h-auto'
+                        priority
+                        className='rounded-md w-auto h-auto'
                     />
                 </div>
                 <div className='w-9/12 flex flex-col gap-2'>
                     <div className='flex justify-between'>
-                        <div className='text-2xl text-slate-950 pt-2 pb-0 font-bold w-52 h-10 flex items-center'>
-                            <span>PORK BISTEK</span>
+                        <div className='text-2xl text-slate-950 pt-2 pb-0 font-bold h-10 flex items-center'>
+                            <span>{recipeData.name}</span>
                         </div>
                         <div
                             className='text-2xl text-slate-950 py-2 font-bold w-8 h-full flex items-center justify-center cursor-pointer'
@@ -111,18 +134,23 @@ const ShowRecipe = () => {
                             className='w-4/12 p-3 shadow-md rounded-sm border items-center justify-center flex flex-col gap-2'
                         >
                             <div className='flex gap-2 items-center'>
-                                <BsGlobeAsiaAustralia className='text-2xl text-green-800' />
+                                <Image
+                                    src={
+                                        linkStorage +
+                                        recipeData.recipe_origin.image_path
+                                    }
+                                    width={25}
+                                    height={25}
+                                    alt='origin_flag'
+                                    priority
+                                    className='w-25 h-25 rounded-full'
+                                />
                                 <div className='text-sm font-bold'>Origin</div>
                             </div>
                             <div className='flex gap-1 items-center'>
-                                <Image
-                                    src='/assets/app/icons/ph.jpg'
-                                    width={10}
-                                    height={10}
-                                    alt='origin_flag'
-                                    className='w-auto h-auto rounded-full'
-                                />
-                                <div className='text-sm'>FILIPINO</div>
+                                <div className='text-sm'>
+                                    {recipeData.recipe_origin.name}
+                                </div>
                             </div>
                         </motion.div>
                         <motion.div
@@ -145,7 +173,9 @@ const ShowRecipe = () => {
                                     Category
                                 </div>
                             </div>
-                            <div className='text-sm'>MAIN COURSE</div>
+                            <div className='text-sm'>
+                                {recipeData.meal_type.name.toUpperCase()}
+                            </div>
                         </motion.div>
                         <motion.div
                             initial={{ scale: 0, opacity: 0 }}
@@ -167,7 +197,11 @@ const ShowRecipe = () => {
                                     Best Served
                                 </div>
                             </div>
-                            <div className='text-sm'>LUNCH, DINNER</div>
+                            <div className='text-sm'>
+                                {recipeData.breakfast ? 'BREAKFAST' : ''}
+                                {recipeData.lunch ? 'LUNCH' : ''}
+                                {recipeData.dinner ? 'DINNER' : ''}
+                            </div>
                         </motion.div>
                         <motion.div
                             initial={{ scale: 0, opacity: 0 }}
@@ -186,29 +220,30 @@ const ShowRecipe = () => {
                             <div className='flex gap-2 items-center'>
                                 <BsPeopleFill className='text-2xl text-orange-300' />
                                 <div className='text-sm font-bold'>
-                                    Category
+                                    No. of Servings
                                 </div>
                             </div>
-                            <div className='text-sm'>10</div>
+                            <div className='text-sm'>
+                                {recipeData.number_of_serving}
+                            </div>
                         </motion.div>
                     </div>
                     <div className='flex gap-3 pb-2 border-b'>
-                        <div className='rounded-full px-1.5 py-0.5 text-xs bg-spoonblue text-white font-semibold'>
-                            PORK
-                        </div>
-                        <div className='rounded-full px-1.5 py-0.5 text-xs bg-spoonblue text-white font-semibold'>
-                            HEAVY LABOR
-                        </div>
-                        <div className='rounded-full px-1.5 py-0.5 text-xs bg-spoonblue text-white font-semibold'>
-                            HOT WEATHER
-                        </div>
+                        {recipeData.season_list_item.map(item => (
+                            <div
+                                key={item.id}
+                                className='rounded-full px-1.5 py-0.5 text-xs bg-spoonblue text-white font-semibold'
+                            >
+                                {item.season.name}
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
             <div className='flex w-full bg-slate-50 p-5 gap-5 shadow-md rounded-b-md select-none'>
-                <Ingredients />
-                <Procedures />
-                <NutritionTable />
+                <Ingredients recipeData={recipeData.ingredient} />
+                <Procedures recipeData={recipeData.procedure} />
+                <NutritionTable recipeData={recipeData} />
             </div>
             <div className='flex flex-col mt-2 bg-slate-50 shadow-md w-full rounded-md justify-evenly gap-2 p-3'>
                 <div className='flex h-full gap-5 ms-2'>

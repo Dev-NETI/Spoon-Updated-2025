@@ -48,7 +48,7 @@ const RecipeCarousel = ({ recipeDataState, setOriginClick }) => {
                                         alt={ingredient.name}
                                         className='w-20 h-20 rounded-full border border-gray-300 shadow-md hover:shadow-lg'
                                     />
-                                    <span className='text-sm text-gray-700 mt-2'>
+                                    <span className='text-[1rem] text-gray-700 mt-2'>
                                         {ingredient.name}
                                     </span>
                                 </div>

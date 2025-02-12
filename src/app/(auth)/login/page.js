@@ -46,11 +46,11 @@ const Login = () => {
 
     return (
         <>
-            <AuthSessionStatus className='mb-4' status={status} />
+            <AuthSessionStatus className='' status={status} />
 
             <form onSubmit={submitForm}>
                 {/* Email Address */}
-                <div className='mb-4 w-full'>
+                <div className='w-full'>
                     <p className='text-xl text-blue-800 font-bold antialiased'>
                         Welcome!
                     </p>
@@ -60,7 +60,6 @@ const Login = () => {
                 </div>
                 <div>
                     <Label htmlFor='email'>Email</Label>
-
                     <Input
                         id='email'
                         type='email'

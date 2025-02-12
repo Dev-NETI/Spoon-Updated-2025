@@ -373,53 +373,62 @@ const FilteredRecipePage = () => {
                         {pages.length > 0 ? (
                             <>
                                 {pages.map((recipe, index) => (
-                                    <motion.div
+                                    <Link
                                         key={recipe.id || index} // Ensure each recipe has a unique key
-                                        initial={{ opacity: 0, scale: 0.97 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        exit={{ opacity: 0, scale: 0 }}
-                                        transition={{
-                                            duration: 0.1,
-                                            scale: {
-                                                type: 'spring',
-                                                visualDuration: 0.1,
-                                                bounce: 0.2,
-                                            },
-                                        }}
-                                        className='bg-blue-950 flex flex-col w-52 py-1 px-2 rounded-lg shadow-md transition-all hover:scale-105 duration-300 ease-in-out cursor-pointer ring-2 active:ring-spoonblue active:bg-blue-900'
+                                        href={'/recipe/' + recipe.slug}
+                                        className='flex'
                                     >
-                                        <div className='relative z-10 p-0'>
-                                            <Image
-                                                src={
-                                                    process.env
-                                                        .NEXT_PUBLIC_STORAGE +
-                                                    recipe.recipe_origin
-                                                        .image_path
-                                                }
-                                                width={10}
-                                                height={10}
-                                                alt='flag'
-                                                className='shadow-md absolute w-auto h-auto rounded-full right-0'
-                                            />
-                                        </div>
-                                        <div className='flex items-center p-1 z-0'>
-                                            <Image
-                                                width={30}
-                                                height={30}
-                                                src={
-                                                    process.env
-                                                        .NEXT_PUBLIC_STORAGE +
-                                                    '/assets/app/' +
-                                                    recipe.image_path
-                                                }
-                                                alt='recipe_img'
-                                                className='w-20 h-20 rounded-s-md bg-slate-100 p-1'
-                                            />
-                                            <span className='bg-slate-900 h-full w-full rounded-e-md font-bold text-[9px] flex p-1 justify-center items-center text-white'>
-                                                {recipe.name}
-                                            </span>
-                                        </div>
-                                    </motion.div>
+                                        <motion.div
+                                            className='bg-blue-950 flex flex-col w-52 py-1 px-2 rounded-lg shadow-md transition-all hover:scale-105 duration-300 ease-in-out cursor-pointer ring-2 active:ring-spoonblue active:bg-blue-900'
+                                            key={recipe.id || index} // Ensure each recipe has a unique key
+                                            initial={{
+                                                opacity: 0,
+                                                scale: 0.97,
+                                            }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            exit={{ opacity: 0, scale: 0 }}
+                                            transition={{
+                                                duration: 0.1,
+                                                scale: {
+                                                    type: 'spring',
+                                                    visualDuration: 0.1,
+                                                    bounce: 0.2,
+                                                },
+                                            }}
+                                        >
+                                            <div className='relative z-10 p-0'>
+                                                <Image
+                                                    src={
+                                                        process.env
+                                                            .NEXT_PUBLIC_STORAGE +
+                                                        recipe.recipe_origin
+                                                            .image_path
+                                                    }
+                                                    width={10}
+                                                    height={10}
+                                                    alt='flag'
+                                                    className='shadow-md absolute w-auto h-auto rounded-full right-0'
+                                                />
+                                            </div>
+                                            <div className='flex items-center p-1 z-0'>
+                                                <Image
+                                                    width={30}
+                                                    height={30}
+                                                    src={
+                                                        process.env
+                                                            .NEXT_PUBLIC_STORAGE +
+                                                        '/assets/app/' +
+                                                        recipe.image_path
+                                                    }
+                                                    alt='recipe_img'
+                                                    className='w-20 h-20 rounded-s-md bg-slate-100 p-1'
+                                                />
+                                                <span className='bg-slate-900 h-full w-full rounded-e-md font-bold text-[9px] flex p-1 justify-center items-center text-white'>
+                                                    {recipe.name}
+                                                </span>
+                                            </div>
+                                        </motion.div>
+                                    </Link>
                                 ))}
                             </>
                         ) : (
