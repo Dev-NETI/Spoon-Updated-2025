@@ -15,8 +15,16 @@ import logo from '/public/images/spoon-logo-text.png';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
-const SideBar = ({ isOpen }) => {
+const SideBar = ({ isOpen, navBarTitle }) => {
     const [isMenuClick, setMenuClick] = useState(null);
+    const [active, setActive] = useState('Spoon PH');
+    const activeFormat =
+        'translate-x-1 font-bold text-blue-900 border-e-[.5em] border-blue-900';
+    const InactiveFormat = 'hover:translate-x-1 hover:text-indigo-900';
+
+    useEffect(() => {
+        navBarTitle(active);
+    }, [active]);
 
     return (
         <div
@@ -44,15 +52,21 @@ const SideBar = ({ isOpen }) => {
             </div>
 
             <div
-                className={`flex flex-col justify-start text-slate-500 ms-8 mt-4 text-sm gap-y-1 transition-all duration-700 delay-600 ease-in-out ${
+                className={`flex flex-col justify-start text-slate-500 ms-5 mt-4 text-[.8rem] gap-y-1 transition-all duration-700 delay-600 ease-in-out ${
                     isOpen
                         ? 'translate-x-0 opacity-100'
                         : '-translate-x-1 opacity-0'
                 }`}
             >
                 <Link
-                    href='/recipe'
-                    className='py-3 rounded-l-md flex items-center justify-between hover:text-indigo-900 transition duration-700 ease-in-out hover:translate-x-1'
+                    href='/dashboard'
+                    onClick={() => {
+                        setActive('Dashboard');
+                        setMenuClick(null);
+                    }}
+                    className={`py-3 rounded-l-md flex items-center justify-between duration-700 ease-in-out ${
+                        active === 'Dashboard' ? activeFormat : InactiveFormat
+                    }`}
                 >
                     <span className='ms-5 flex items-center gap-2'>
                         <FiLayers />
@@ -61,25 +75,30 @@ const SideBar = ({ isOpen }) => {
                 </Link>
                 <Link
                     href='/recipe'
-                    className='bg-slate-200 py-3 rounded-l-md border-r-4 border-indigo-900'
+                    onClick={() => {
+                        setMenuClick(null);
+                        setActive('Recipes');
+                    }}
+                    className={`py-3 rounded-l-md flex items-center justify-between duration-700 ease-in-out ${
+                        active === 'Recipes' || active === 'Spoon PH' ? activeFormat : InactiveFormat
+                    }`}
                 >
-                    <span className='ms-5 flex items-center gap-2 text-indigo-900 font-bold '>
+                    <span className='ms-5 flex items-center gap-2 hover:text-indigo-900 text-[.8rem] transition duration-700 ease-in-out hover:translate-x-1'>
                         <FiBookOpen />
                         Recipes
                     </span>
                 </Link>
-                <div className='flex flex-col justify-start text-slate-500 text-sm overflow-hidden'>
-                    <Link
-                        href='/recipe'
-                        onClick={() =>
+                <div className='flex flex-col justify-start text-slate-500 text-[.8rem] overflow-hidden'>
+                    <div
+                        onClick={() => {
                             setMenuClick(prev =>
                                 prev === 'nutrispoon' ? null : 'nutrispoon'
-                            )
-                        }
-                        className={`overflow-y-hidden flex py-3 rounded-l-md items-center justify-between hover:text-indigo-900 transition duration-700 hover:translate-x-1 ${
+                            );
+                        }}
+                        className={`overflow-y-hidden flex py-3 rounded-l-md items-center justify-between transition duration-700 ${
                             isMenuClick === 'nutrispoon'
-                                ? 'bg-slate-200 text-indigo-900 font-semibold'
-                                : ''
+                                ? 'bg-slate-200 text-indigo-900 font-semibold translate-x-1'
+                                : 'hover:translate-x-1 hover:text-indigo-900'
                         }`}
                     >
                         <span className='ms-5 flex items-center gap-2'>
@@ -95,7 +114,7 @@ const SideBar = ({ isOpen }) => {
                                 }`}
                             />
                         </span>
-                    </Link>
+                    </div>
 
                     <div
                         className={`ms-2 bg-slate-200 overflow-hidden transition-all duration-700 ease-in-out ${
@@ -105,8 +124,11 @@ const SideBar = ({ isOpen }) => {
                         }`}
                     >
                         <Link
-                            href='/recipe'
-                            className='py-1 rounded-l-md flex items-center justify-between hover:text-indigo-900 transition duration-700 ease-in-out'
+                            href='/calculator/bmi'
+                            onClick={() => {
+                                setActive('BMI Calculator');
+                            }}
+                            className={`py-1 rounded-l-md flex items-center justify-between text-[.8rem] transition duration-700 ease-in-out ${active === 'BMI Calculator' ? activeFormat : InactiveFormat}`}
                         >
                             <span className='ms-5 flex items-center gap-2'>
                                 <FiLayout />
@@ -114,8 +136,11 @@ const SideBar = ({ isOpen }) => {
                             </span>
                         </Link>
                         <Link
-                            href='/recipe'
-                            className='py-1 rounded-l-md flex items-center justify-between hover:text-indigo-900 transition duration-700 ease-in-out'
+                            href='#'
+                            onClick={() => {
+                                setActive('Calorie Calculator');
+                            }}
+                            className={`py-1 rounded-l-md flex items-center justify-between text-[.8rem] transition duration-700 ease-in-out ${active === 'Calorie Calculator' ? activeFormat : InactiveFormat}`}
                         >
                             <span className='ms-5 flex items-center gap-2'>
                                 <FiLayout />
@@ -123,8 +148,11 @@ const SideBar = ({ isOpen }) => {
                             </span>
                         </Link>
                         <Link
-                            href='/recipe'
-                            className='py-1 rounded-l-md flex items-center justify-between hover:text-indigo-900 transition duration-700 ease-in-out'
+                            href='#'
+                            onClick={() => {
+                                setActive('Nutrient Calculator');
+                            }}
+                            className={`py-1 rounded-l-md flex items-center justify-between text-[.8rem] transition duration-700 ease-in-out ${active === 'Nutrient Calculator' ? activeFormat : InactiveFormat}`}
                         >
                             <span className='ms-5 flex items-center gap-2'>
                                 <FiLayout />
@@ -132,8 +160,11 @@ const SideBar = ({ isOpen }) => {
                             </span>
                         </Link>
                         <Link
-                            href='/recipe'
-                            className='py-1 rounded-l-md flex items-center justify-between hover:text-indigo-900 transition duration-700 ease-in-out'
+                            href='#'
+                            onClick={() => {
+                                setActive('Blood Pressure Tracker');
+                            }}
+                            className={`py-1 rounded-l-md flex items-center justify-between text-[.8rem] transition duration-700 ease-in-out ${active === 'Blood Pressure Tracker' ? activeFormat : InactiveFormat}`}
                         >
                             <span className='ms-5 flex items-center gap-2'>
                                 <FiLayout />
@@ -141,8 +172,11 @@ const SideBar = ({ isOpen }) => {
                             </span>
                         </Link>
                         <Link
-                            href='/recipe'
-                            className='py-1 rounded-l-md flex items-center justify-between hover:text-indigo-900 transition duration-700 ease-in-out'
+                            href='#'
+                            onClick={() => {
+                                setActive('My Ideal Plato');
+                            }}
+                            className={`py-1 rounded-l-md flex items-center justify-between text-[.8rem] transition duration-700 ease-in-out ${active === 'My Ideal Plato' ? activeFormat : InactiveFormat}`}
                         >
                             <span className='ms-5 flex items-center gap-2'>
                                 <FiLayout />
@@ -154,8 +188,12 @@ const SideBar = ({ isOpen }) => {
 
                 {/* Sibling Content */}
                 <Link
-                    href='/'
-                    className='bg-slate-100 py-3 rounded-l-md hover:text-indigo-900 transition duration-700 ease-in-out hover:translate-x-1'
+                    href='#'
+                    onClick={() => {
+                        setActive('Blog');
+                        setMenuClick(null);
+                    }}
+                    className={`py-3 rounded-l-md flex items-center justify-between transition duration-700 ease-in-out ${active === 'Blog' ? activeFormat : InactiveFormat}`}
                 >
                     <span className='ms-5 flex items-center gap-2'>
                         <FiEdit />
@@ -164,26 +202,30 @@ const SideBar = ({ isOpen }) => {
                 </Link>
 
                 <Link
-                    href='/'
-                    className='bg-slate-100 py-3 rounded-l-md hover:text-indigo-900 transition duration-700 hover:translate-x-1'
+                    href='#'
+                    onClick={() => {
+                        setActive('Testimonial');
+                        setMenuClick(null);
+                    }}
+                    className={`py-3 rounded-l-md flex items-center justify-between transition duration-700 ease-in-out ${active === 'Testimonial' ? activeFormat : InactiveFormat}`}
                 >
                     <span className='ms-5 flex items-center gap-2'>
                         <FiFileText />
                         Testimonials
                     </span>
                 </Link>
-                <div className='flex flex-col justify-start text-slate-500 text-sm overflow-hidden'>
+                <div className='flex flex-col justify-start text-slate-500 text-[.8rem] overflow-hidden'>
                     <Link
                         href='#'
-                        onClick={() =>
+                        onClick={() => {
                             setMenuClick(prev =>
                                 prev === 'maintenance' ? null : 'maintenance'
-                            )
-                        }
-                        className={`py-3 rounded-l-md flex items-center justify-between hover:text-indigo-900 transition duration-700 hover:translate-x-1 ${
+                            );
+                        }}
+                        className={`py-3 rounded-l-md flex items-center justify-between transition duration-700 ${
                             isMenuClick === 'maintenance'
-                                ? 'bg-slate-200 text-indigo-900 max-height-[500px]'
-                                : ''
+                                ? 'bg-slate-200 text-indigo-900 max-height-[500px] font-semibold translate-x-1'
+                                : 'hover:translate-x-1 hover:text-indigo-900'
                         }`}
                     >
                         <span className='ms-5 flex items-center gap-2'>
@@ -200,8 +242,11 @@ const SideBar = ({ isOpen }) => {
                         className={`mt-0.5 flex flex-col justify-start ms-2 bg-slate-200 overflow-hidden transition duration-500 ease-in-out ${isMenuClick === 'maintenance' ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'}`}
                     >
                         <Link
-                            href='/recipe'
-                            className='py-1 rounded-l-md flex items-center justify-between hover:text-indigo-900 transition duration-700 ease-in-out'
+                            href='#'
+                            onClick={() => {
+                                setActive('Company User');
+                            }}
+                            className={`py-1 rounded-l-md flex items-center justify-between transition duration-700 ease-in-out ${active === 'Company User' ? activeFormat : InactiveFormat}`}
                         >
                             <span className='ms-5 flex items-center gap-2'>
                                 <FiUsers />
@@ -209,8 +254,11 @@ const SideBar = ({ isOpen }) => {
                             </span>
                         </Link>
                         <Link
-                            href='/recipe'
-                            className='py-1 rounded-l-md flex items-center justify-between hover:text-indigo-900 transition duration-700 ease-in-out'
+                            href='#'
+                            onClick={() => {
+                                setActive('All Users');
+                            }}
+                            className={`py-1 rounded-l-md flex items-center justify-between transition duration-700 ease-in-out ${active === 'All Users' ? activeFormat : InactiveFormat}`}
                         >
                             <span className='ms-5 flex items-center gap-2'>
                                 <FiUsers />

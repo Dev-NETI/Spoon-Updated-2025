@@ -20,7 +20,6 @@ export function middleware(request) {
     ];
 
     const protectedUserTypeRoutes = [
-        '/dashboard',
         '/admin/user',
         '/admin/home',
         '/admin/manage',

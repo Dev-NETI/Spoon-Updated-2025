@@ -10,7 +10,7 @@ import { React, useState } from 'react';
 import { FaBell } from 'react-icons/fa';
 import { HiEnvelope, HiEnvelopeOpen } from 'react-icons/hi2';
 
-const NavBar = ({ toggleSidebar, isOpen }) => {
+const NavBar = ({ toggleSidebar, isOpen, title }) => {
     const [profileshow, setProfileShow] = useState(false);
     const [notificationShow, setNotificationShow] = useState(false);
     const defaultUserPic =
@@ -34,7 +34,9 @@ const NavBar = ({ toggleSidebar, isOpen }) => {
                         }`}
                     />
                 </div>
-                <h1 className='text-2xl font-bold'>Recipes</h1>
+                <h1 className='text-2xl font-bold transition duration-300 ease-in-out'>
+                    {title}
+                </h1>
             </div>
             <div className='relative justify-end w-full flex'>
                 <div className='flex items-center gap-5'>

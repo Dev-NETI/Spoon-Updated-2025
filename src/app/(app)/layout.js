@@ -8,8 +8,9 @@ import NavBar from '@/components/NavBar';
 import SideBarMobile from '@/components/app/recipe-view/SideBarMobile';
 
 const AppLayout = ({ children }) => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const { user } = useAuth({ middleware: 'auth' });
+    const [navBarTitle, setNavBarTitle] = useState('SpoonPh');
 
     if (!user) {
         return <Loading />;
@@ -21,9 +22,9 @@ const AppLayout = ({ children }) => {
 
     return (
         <div className='relative flex min-h-screen max-w-full bg-gray-100'>
-            {/* <SideBarMobile /> */}
             <SideBar
                 isOpen={isSidebarOpen}
+                navBarTitle={setNavBarTitle}
                 className={`transition-all duration-700 ease-in-out ${
                     isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
                 }`}
@@ -34,7 +35,11 @@ const AppLayout = ({ children }) => {
                     isSidebarOpen ? 'xl:translate-x-2' : 'xl:translate-x-0'
                 }`}
             >
-                <NavBar toggleSidebar={toggleSidebar} isOpen={isSidebarOpen} />
+                <NavBar
+                    toggleSidebar={toggleSidebar}
+                    title={navBarTitle}
+                    isOpen={isSidebarOpen}
+                />
 
                 <div className='p-4 min-w-full'>{children}</div>
             </div>

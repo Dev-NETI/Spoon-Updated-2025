@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import { BsFillStarFill } from 'react-icons/bs';
+import { FiStar } from 'react-icons/fi';
 
 export default function Comments() {
     return (
@@ -11,42 +13,49 @@ export default function Comments() {
                     // Simulated Comments Array
                     {
                         name: 'Brian Griffin',
+                        star: 5,
                         img: '/images/Brian_Griffin.png',
                         time: '2s ago',
                         text: 'This is delicious.',
                     },
                     {
                         name: 'Stewie Griffin',
+                        star: 2,
                         img: '/images/stewie.jpg',
                         time: '2d ago',
                         text: 'Brian Griffin . Check this out.',
                     },
                     {
                         name: 'Stewie Griffin',
+                        star: 2,
                         img: '/images/stewie.jpg',
                         time: '2d ago',
                         text: 'Brian Griffin . Check this out.',
                     },
                     {
                         name: 'Stewie Griffin',
+                        star: 2,
                         img: '/images/stewie.jpg',
                         time: '2d ago',
                         text: 'Brian Griffin . Check this out.',
                     },
                     {
                         name: 'Stewie Griffin',
+                        star: 2,
                         img: '/images/stewie.jpg',
                         time: '2d ago',
                         text: 'Brian Griffin . Check this out.',
                     },
                     {
                         name: 'Stewie Griffin',
+                        star: 2,
                         img: '/images/stewie.jpg',
                         time: '2d ago',
                         text: 'Brian Griffin . Check this out.',
                     },
                     {
                         name: 'Stewie Griffin',
+                        star: 2,
                         img: '/images/stewie.jpg',
                         time: '2d ago',
                         text: 'Brian Griffin . Check this out.',
@@ -70,6 +79,13 @@ export default function Comments() {
                             <span className='text-[7px] text-slate-500'>
                                 {comment.time}
                             </span>
+                        </div>
+                        <div className='ms-5 text-[.7rem] flex text-yellow-300'>
+                            {Array.from({ length: comment.star }).map(
+                                (_, index) => (
+                                    <BsFillStarFill key={index} />
+                                )
+                            )}
                         </div>
                         <div className='text-[12px] text-slate-800 ms-5'>
                             <span className='text-blue-800 font-semibold'>
