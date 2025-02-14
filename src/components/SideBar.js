@@ -6,7 +6,6 @@ import {
     FiEdit,
     FiFileText,
     FiSettings,
-    FiLayout,
     FiUsers,
 } from 'react-icons/fi';
 import Link from 'next/link';
@@ -28,7 +27,7 @@ const SideBar = ({ isOpen, navBarTitle }) => {
 
     return (
         <div
-            className={`top-0 left-0 w-2/12 bg-slate-100 h-full transition-all duration-[900ms] ease-in-out hidden xl:flex flex-col ${
+            className={`top-0 left-0 w-2/12 bg-slate-100 transition-all duration-[900ms] ease-in-out hidden xl:flex flex-col ${
                 isOpen
                     ? 'xl:sticky xl:translate-x-1.5 xl:opacity-100 xl:max-w-[900px] xl:pointer-events-auto'
                     : 'xl:max-w-0 xl:relative xl:opacity-0 xl:pointer-events-none'
@@ -80,7 +79,9 @@ const SideBar = ({ isOpen, navBarTitle }) => {
                         setActive('Recipes');
                     }}
                     className={`py-3 rounded-l-md flex items-center justify-between duration-700 ease-in-out ${
-                        active === 'Recipes' || active === 'Spoon PH' ? activeFormat : InactiveFormat
+                        active === 'Recipes' || active === 'Spoon PH'
+                            ? activeFormat
+                            : InactiveFormat
                     }`}
                 >
                     <span className='ms-5 flex items-center gap-2 hover:text-indigo-900 text-[.8rem] transition duration-700 ease-in-out hover:translate-x-1'>
@@ -88,103 +89,23 @@ const SideBar = ({ isOpen, navBarTitle }) => {
                         Recipes
                     </span>
                 </Link>
-                <div className='flex flex-col justify-start text-slate-500 text-[.8rem] overflow-hidden'>
-                    <div
-                        onClick={() => {
-                            setMenuClick(prev =>
-                                prev === 'nutrispoon' ? null : 'nutrispoon'
-                            );
-                        }}
-                        className={`overflow-y-hidden flex py-3 rounded-l-md items-center justify-between transition duration-700 ${
-                            isMenuClick === 'nutrispoon'
-                                ? 'bg-slate-200 text-indigo-900 font-semibold translate-x-1'
-                                : 'hover:translate-x-1 hover:text-indigo-900'
-                        }`}
-                    >
-                        <span className='ms-5 flex items-center gap-2'>
-                            <FiSlack />
-                            Nutrispoon Companion
-                        </span>
-                        <span className='me-2'>
-                            <FiChevronRight
-                                className={`transition-transform duration-500 ease-in-out ${
-                                    isMenuClick === 'nutrispoon'
-                                        ? 'rotate-90'
-                                        : 'rotate-0'
-                                }`}
-                            />
-                        </span>
-                    </div>
-
-                    <div
-                        className={`ms-2 bg-slate-200 overflow-hidden transition-all duration-700 ease-in-out ${
-                            isMenuClick === 'nutrispoon'
-                                ? 'max-h-[500px] opacity-100'
-                                : 'max-h-0 opacity-0'
-                        }`}
-                    >
-                        <Link
-                            href='/calculator/bmi'
-                            onClick={() => {
-                                setActive('BMI Calculator');
-                            }}
-                            className={`py-1 rounded-l-md flex items-center justify-between text-[.8rem] transition duration-700 ease-in-out ${active === 'BMI Calculator' ? activeFormat : InactiveFormat}`}
-                        >
-                            <span className='ms-5 flex items-center gap-2'>
-                                <FiLayout />
-                                BMI Calculator
-                            </span>
-                        </Link>
-                        <Link
-                            href='#'
-                            onClick={() => {
-                                setActive('Calorie Calculator');
-                            }}
-                            className={`py-1 rounded-l-md flex items-center justify-between text-[.8rem] transition duration-700 ease-in-out ${active === 'Calorie Calculator' ? activeFormat : InactiveFormat}`}
-                        >
-                            <span className='ms-5 flex items-center gap-2'>
-                                <FiLayout />
-                                Calorie Calculator
-                            </span>
-                        </Link>
-                        <Link
-                            href='#'
-                            onClick={() => {
-                                setActive('Nutrient Calculator');
-                            }}
-                            className={`py-1 rounded-l-md flex items-center justify-between text-[.8rem] transition duration-700 ease-in-out ${active === 'Nutrient Calculator' ? activeFormat : InactiveFormat}`}
-                        >
-                            <span className='ms-5 flex items-center gap-2'>
-                                <FiLayout />
-                                Nutrient Calculator
-                            </span>
-                        </Link>
-                        <Link
-                            href='#'
-                            onClick={() => {
-                                setActive('Blood Pressure Tracker');
-                            }}
-                            className={`py-1 rounded-l-md flex items-center justify-between text-[.8rem] transition duration-700 ease-in-out ${active === 'Blood Pressure Tracker' ? activeFormat : InactiveFormat}`}
-                        >
-                            <span className='ms-5 flex items-center gap-2'>
-                                <FiLayout />
-                                Blood Pressure Tracker
-                            </span>
-                        </Link>
-                        <Link
-                            href='#'
-                            onClick={() => {
-                                setActive('My Ideal Plato');
-                            }}
-                            className={`py-1 rounded-l-md flex items-center justify-between text-[.8rem] transition duration-700 ease-in-out ${active === 'My Ideal Plato' ? activeFormat : InactiveFormat}`}
-                        >
-                            <span className='ms-5 flex items-center gap-2'>
-                                <FiLayout />
-                                My Ideal Plato
-                            </span>
-                        </Link>
-                    </div>
-                </div>
+                <Link
+                    href='/nutrispoon'
+                    onClick={() => {
+                        setMenuClick(null);
+                        setActive('Nutrispoon Companion');
+                    }}
+                    className={`py-3 rounded-l-md flex items-center justify-between duration-700 ease-in-out ${
+                        active === 'Nutrispoon Companion'
+                            ? activeFormat
+                            : InactiveFormat
+                    }`}
+                >
+                    <span className='ms-5 flex items-center gap-2 hover:text-indigo-900 text-[.8rem] transition duration-700 ease-in-out hover:translate-x-1'>
+                        <FiSlack />
+                        Nutrispoon Companion
+                    </span>
+                </Link>
 
                 {/* Sibling Content */}
                 <Link

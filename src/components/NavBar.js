@@ -16,6 +16,19 @@ const NavBar = ({ toggleSidebar, isOpen, title }) => {
     const defaultUserPic =
         process.env.NEXT_PUBLIC_STORAGE + '/images/profile-5.png';
 
+    const getTitle = title => {
+        switch (title) {
+            case 'BMI Calculator':
+            case 'Calorie Calculator':
+            case 'Nutrient Calculator':
+            case 'Blood Pressure Tracker':
+            case 'My Ideal Plato':
+                return 'Nutrispoon Companion'; // Common return for all matched cases
+            default:
+                return title; // Return title for other cases
+        }
+    };
+
     return (
         <div className='flex bg-slate-100 xl:w-min-screen h-20 border border-b items-center px-5 sticky top-0 z-50 shadow-sm'>
             <div className='flex justify-start items-center w-full gap-5 select-none'>
@@ -35,7 +48,7 @@ const NavBar = ({ toggleSidebar, isOpen, title }) => {
                     />
                 </div>
                 <h1 className='text-2xl font-bold transition duration-300 ease-in-out'>
-                    {title}
+                    {getTitle(title)}
                 </h1>
             </div>
             <div className='relative justify-end w-full flex'>

@@ -41,7 +41,7 @@ const AppLayout = ({ children }) => {
                     isOpen={isSidebarOpen}
                 />
 
-                <div className='p-4 min-w-full'>{children}</div>
+                <div>{children}</div>
             </div>
         </div>
     );

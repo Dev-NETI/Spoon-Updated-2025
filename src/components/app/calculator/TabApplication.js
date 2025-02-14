@@ -1,10 +1,6 @@
-import { useState } from 'react';
-
-export default function BMIApplicationTab() {
-    const [activeTab, setActiveTab] = useState('bmi');
-
+export default function BMIApplicationTab({ activeTab, setActiveTab }) {
     return (
-        <div className='flex mt-2 gap-1 text-[.8rem] font-semibold ms-[0.156vw]'>
+        <div className='flex mt-2 gap-1 text-[.8rem] font-semibold ms-[0.156vw] select-none'>
             <div
                 onClick={() => setActiveTab('bmi')}
                 className={`rounded-t-md p-2 cursor-pointer duration-300 ease-in-out ${activeTab === 'bmi' ? 'bg-white scale-105 me-2' : 'bg-slate-200'}`}
