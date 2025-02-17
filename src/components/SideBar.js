@@ -13,6 +13,8 @@ import spoonICO from '/public/images/spoon-logo-full.png';
 import logo from '/public/images/spoon-logo-text.png';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { MdPrivacyTip } from 'react-icons/md';
+import { RiContactsBookFill } from 'react-icons/ri';
 
 const SideBar = ({ isOpen, navBarTitle }) => {
     const [isMenuClick, setMenuClick] = useState(null);
@@ -51,7 +53,7 @@ const SideBar = ({ isOpen, navBarTitle }) => {
             </div>
 
             <div
-                className={`flex flex-col justify-start text-slate-500 ms-5 mt-4 text-[.8rem] gap-y-1 transition-all duration-700 delay-600 ease-in-out ${
+                className={`flex flex-col justify-start min-h-96 text-slate-500 ms-5 mt-4 text-[.8rem] gap-y-1 transition-all duration-700 delay-600 ease-in-out border-b ${
                     isOpen
                         ? 'translate-x-0 opacity-100'
                         : '-translate-x-1 opacity-0'
@@ -135,58 +137,52 @@ const SideBar = ({ isOpen, navBarTitle }) => {
                         Testimonials
                     </span>
                 </Link>
-                <div className='flex flex-col justify-start text-slate-500 text-[.8rem] overflow-hidden'>
-                    <Link
-                        href='#'
-                        onClick={() => {
-                            setMenuClick(prev =>
-                                prev === 'maintenance' ? null : 'maintenance'
-                            );
-                        }}
-                        className={`py-3 rounded-l-md flex items-center justify-between transition duration-700 ${
-                            isMenuClick === 'maintenance'
-                                ? 'bg-slate-200 text-indigo-900 max-height-[500px] font-semibold translate-x-1'
-                                : 'hover:translate-x-1 hover:text-indigo-900'
-                        }`}
-                    >
-                        <span className='ms-5 flex items-center gap-2'>
-                            <FiSettings />
-                            Maintenance
-                        </span>
-                        <span className='me-2'>
-                            <FiChevronRight
-                                className={`transition duration-200 ease-in-out ${isMenuClick === 'maintenance' ? 'rotate-90' : 'rotate-0'}`}
-                            />
-                        </span>
-                    </Link>
-                    <div
-                        className={`mt-0.5 flex flex-col justify-start ms-2 bg-slate-200 overflow-hidden transition duration-500 ease-in-out ${isMenuClick === 'maintenance' ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'}`}
-                    >
-                        <Link
-                            href='#'
-                            onClick={() => {
-                                setActive('Company User');
-                            }}
-                            className={`py-1 rounded-l-md flex items-center justify-between transition duration-700 ease-in-out ${active === 'Company User' ? activeFormat : InactiveFormat}`}
-                        >
-                            <span className='ms-5 flex items-center gap-2'>
-                                <FiUsers />
-                                Company User
-                            </span>
-                        </Link>
-                        <Link
-                            href='#'
-                            onClick={() => {
-                                setActive('All Users');
-                            }}
-                            className={`py-1 rounded-l-md flex items-center justify-between transition duration-700 ease-in-out ${active === 'All Users' ? activeFormat : InactiveFormat}`}
-                        >
-                            <span className='ms-5 flex items-center gap-2'>
-                                <FiUsers />
-                                All Users
-                            </span>
-                        </Link>
-                    </div>
+                <Link
+                    href='/account-setup'
+                    onClick={() => {
+                        setActive('Company User');
+                        setMenuClick(null);
+                    }}
+                    className={`py-3 rounded-l-md flex items-center justify-between transition duration-700 ease-in-out ${active === 'Company User' ? activeFormat : InactiveFormat}`}
+                >
+                    <span className='ms-5 flex items-center gap-2'>
+                        <FiUsers />
+                        Company User
+                    </span>
+                </Link>
+            </div>
+            <div className='flex flex-col text-slate-500 bg-slate-100 h-full'>
+                <div className='flex flex-col'>
+                    <span className='ms-5 mt-4 font-bold text-sm flex gap-2 items-center'>
+                        <MdPrivacyTip /> Data Privavy Policy
+                    </span>
+                    <span className='ms-5 font-bold text-xs'>
+                        SPOON-Seafarers Program
+                    </span>
+                    <span className='ms-5 font-semibold text-xs'>
+                        Onwards to Outstanding Nutrition
+                    </span>
+                    <span className='ms-5 text-xs'>
+                        © 2024 All Rights Reserved
+                    </span>
+                </div>
+                <div className='flex flex-col'>
+                    <span className='ms-5 mt-4 font-bold text-sm flex gap-2 items-center'>
+                        <RiContactsBookFill />
+                        Contact Us @
+                    </span>
+                    <span className='ms-5 font-bold text-xs'>
+                        Email Address:
+                    </span>
+                    <span className='ms-5 text-xs'>
+                        inquiry@spoon.ph
+                    </span>
+                    <span className='ms-5 text-xs font-bold'>
+                        Telephone
+                    </span>
+                    <span className='ms-5 text-xs'>
+                        (049) 508 - 8600
+                    </span>
                 </div>
             </div>
         </div>
